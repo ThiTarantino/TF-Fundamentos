@@ -4,19 +4,19 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
-        // Vetores originais
+     
         Carro[] carro = new Carro[50];
         Cliente[] cliente = new Cliente[50];
         Emprestimo[] emprestimo = new Emprestimo[50];
         
-        // Matrizes adicionadas
+       
         int[][] historicoMensal = new int[50][12]; // conta empréstimos por mês
         String[][] statusCarros = new String[50][12]; // "LIVRE" ou "OCUPADO"
         
     
         for (int i = 0; i < 50; i++) {
             for (int j = 0; j < 12; j++) {
-                statusCarros[i][j] = "LIVRE";
+                statusCarros[i][j] = "L";
             }
         }
         
@@ -44,7 +44,7 @@ public class Main {
             System.out.println("9. Exclusão de cadastro de Carro");
             System.out.println("10. Exclusão de cadastro de Cliente");
             System.out.println("11. Exclusão de cadastro de Empréstimo");
-            System.out.println("12. Visualizar Relatórios (MATRIZES)");
+            System.out.println("12. Visualizar Relatórios");
             System.out.println("0. Sair");
             decisao = sc.nextInt();
             
@@ -59,9 +59,9 @@ public class Main {
                     int ano = sc.nextInt();
                     
                     carro[icarro] = new Carro(modelo, placa, ano);
-                    // Inicializa status do novo carro
+                    //status do carro
                     for (int i = 0; i < 12; i++) {
-                        statusCarros[icarro][i] = "LIVRE";
+                        statusCarros[icarro][i] = "L";
                     }
                     icarro++;
                     System.out.println("\n\nAperte qualquer tecla para continuar");
@@ -139,7 +139,7 @@ public class Main {
                     String[] partesData = decData.split("-");
                     int mes = Integer.parseInt(partesData[1]) - 1; // Janeiro = 0
                     historicoMensal[decCliente][mes]++;
-                    statusCarros[decCarro][mes] = "OCUPADO";
+                    statusCarros[decCarro][mes] = "O";
                     
                     iemprestimo++;
                     System.out.println("\n\nAperte qualquer tecla para continuar");
@@ -351,7 +351,7 @@ public class Main {
                     for (int i = 0; i < icarro; i++) {
                         System.out.print(carro[i].getModelo() + "\t");
                         for (int j = 0; j < 12; j++) {
-                            System.out.print(statusCarros[i][j].charAt(0) + "   ");
+                            System.out.print(statusCarros[i][j] + "   ");
                         }
                         System.out.println();
                     }
